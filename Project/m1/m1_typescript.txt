@@ -1,0 +1,185 @@
+Script started on Mon 11 Jul 2016 01:40:50 PM EDT
+shkhan4@matrix:~/ipc144/elnaz> whoami
+shkhan4
+shkhan4@matrix:~/ipc144/elnaz> cat M1.c
+/*
+I declare that the attached assignment is wholly my own work in accordance with
+Seneca Academic Policy. No part of this assignment has been copied manually or
+electronically from any other source (including web sites) or distributed to
+other students
+
+Name: Saif Husain Khan Student ID: 125444158
+*/
+
+
+#include <stdio.h>
+//function to return the tile type(letter) for a certain tile
+
+char getTileType(unsigned int index);
+void displayBoard(unsigned int size);
+
+int main(void){
+	int userinput;
+
+	if (getTileType(153) != 'W')
+		printf("153 should return W");
+	else if (getTileType(65) != 'L')
+		printf("65 should return L");
+	else if (getTileType(49) != 'G')
+		printf("49 should return G");
+	else if (getTileType(0) != 'C')
+		printf("0 should return C");
+	else if (getTileType(105) != 'G')
+		printf("105 should return G");
+	else if (getTileType(79) != ' ')
+		printf("79 should be space");
+	else{
+		printf("getTileType test passed!\n");
+		printf("Enter board size: ");
+		scanf("%d", &userinput);
+
+		if (userinput == 1){
+			printf(" ___ \n");
+			printf("| C |\n");
+			printf("|___|\n");
+			printf("\n");
+		}
+		else if (userinput == 0)
+			printf("\n");
+		else
+			displayBoard(userinput);
+	}
+	return 0;
+}
+
+char getTileType(unsigned int index){
+	char C;
+	char G;
+	char L;
+	char W;
+	char skip = ' ';
+	if (index == 0){
+		return 'C';
+	}
+	if (index % 7 == 0){
+		return 'G';
+	}
+	if (index % 5 == 0){
+		return 'L';
+	}
+	if (index % 3 == 0){
+		return 'W';
+	}
+	else{
+		return skip;
+	}
+}
+
+void displayBoard(unsigned int size){
+	int count;
+	const int num = size;
+	int i, j, a, b;
+	int countA = ((num*4)-5);
+	int countB = size;
+
+
+	for (count = 0; count <= (size -1); count++){
+		printf(" ___ ");
+	}
+	printf("\n");
+	for (count = 0; count <= (size -1); count++){
+		printf("| %c |", getTileType(count));
+	}
+	printf("\n");
+	for (count = 0; count <= (size -1); count++){
+		printf("|___|");
+	}
+	printf("\n");
+
+
+	for (j = 0; j < (num - 2); j++){
+		printf(" ___ ");
+
+		for (i = 0; i < (num - 2); i++)
+			printf("     ");
+		printf(" ___ ");
+
+		printf("\n");
+		printf("| %c |", getTileType(countA));
+			for (i = 0; i < (num - 2); i++)
+				printf("     ");
+			printf("| %c |", getTileType(countB));
+			
+			printf("\n");
+
+			printf("|___|");
+
+				for (i = 0; i < (num - 2); i++)
+					printf("     ");
+				printf("|___|");
+
+				printf("\n");
+				countA--;
+				countB++;
+	}
+
+
+	for (count = ((num*2)+(num-3)); count >= ((num*2)-2); count--)
+		printf(" ___ ");
+	printf("\n");
+
+	for (count = ((num*2)+(num-3)); count >= ((num*2)-2); count--)
+		printf("| %c |", getTileType(count));
+	printf("\n");
+	for (count = ((num*2)+(num-3)); count >= ((num*2)-2); count--)
+		printf("|___|");
+	printf("\n");
+}
+shkhan4@matrix:~/ipc144/elnaz> clang M1.c
+shkhan4@matrix:~/ipc144/elnaz> a.out
+getTileType test passed!
+Enter board size: 4
+ ___  ___  ___  ___ 
+| C ||   ||   || W |
+|___||___||___||___|
+ ___            ___ 
+|   |          |   |
+|___|          |___|
+ ___            ___ 
+| L |          | L |
+|___|          |___|
+ ___  ___  ___  ___ 
+| W ||   || G || W |
+|___||___||___||___|
+shkhan4@matrix:~/ipc144/elnaz> a.out
+getTileType test passed!
+Enter board size: 1
+ ___ 
+| C |
+|___|
+
+shkhan4@matrix:~/ipc144/elnaz> a.out
+getTileType test passed!
+Enter board size: 6
+ ___  ___  ___  ___  ___  ___ 
+| C ||   ||   || W ||   || L |
+|___||___||___||___||___||___|
+ ___                      ___ 
+|   |                    | W |
+|___|                    |___|
+ ___                      ___ 
+| W |                    | G |
+|___|                    |___|
+ ___                      ___ 
+|   |                    |   |
+|___|                    |___|
+ ___                      ___ 
+|   |                    | W |
+|___|                    |___|
+ ___  ___  ___  ___  ___  ___ 
+| L || G ||   || W ||   || L |
+|___||___||___||___||___||___|
+shkhan4@matrix:~/ipc144/elnaz> exit
+exit
+
+Script done on Mon 11 Jul 2016 01:41:45 PM EDT
